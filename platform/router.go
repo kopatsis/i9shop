@@ -12,6 +12,7 @@ func New() *gin.Engine {
 	router := gin.Default()
 
 	router.Use(middleware.CORSMiddleware())
+	router.Static("/static", "./static")
 
 	router.LoadHTMLGlob("templates/*")
 	router.GET("/public", func(c *gin.Context) {
@@ -23,7 +24,7 @@ func New() *gin.Engine {
 		})
 	})
 
-	router.GET("/unprotected", func(c *gin.Context) {
+	router.GET("/private", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.tmpl", gin.H{
 			"Title":   "Private Page",
 			"Header":  "Welcome to Private Page",
