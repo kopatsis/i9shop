@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"i9sh/platform"
+	"i9sh/platform/login"
 
 	"github.com/joho/godotenv"
 )
@@ -17,7 +18,9 @@ func main() {
 		}
 	}
 
-	rtr := platform.New()
+	auth := login.InitFirebase()
+
+	rtr := platform.New(auth)
 
 	port := os.Getenv("PORT")
 	if port == "" {
